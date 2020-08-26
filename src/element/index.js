@@ -8,6 +8,8 @@ import {
   Button,
   Pagination,
   Option,
+  Table,
+  TableColumn,
 } from "element-ui";
 const element = {
   install: function(Vue) {
@@ -20,6 +22,8 @@ const element = {
     Vue.use(Button);
     Vue.use(Pagination);
     Vue.use(Option);
+    Vue.use(Table);
+    Vue.use(TableColumn);
   },
 };
 export default element;
