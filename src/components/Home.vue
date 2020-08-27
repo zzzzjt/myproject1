@@ -1,5 +1,5 @@
 <template>
-  <div>监控资源</div>
+  <div>首页</div>
 </template>
 
 <script>
@@ -8,5 +8,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

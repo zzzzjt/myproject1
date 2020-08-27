@@ -10,6 +10,13 @@ import {
   Option,
   Table,
   TableColumn,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Submenu,
+  MenuItem,
+  Menu,
 } from "element-ui";
 const element = {
   install: function(Vue) {
@@ -24,6 +31,13 @@ const element = {
     Vue.use(Option);
     Vue.use(Table);
     Vue.use(TableColumn);
+    Vue.use(Container);
+    Vue.use(Header);
+    Vue.use(Aside);
+    Vue.use(Main);
+    Vue.use(Submenu);
+    Vue.use(MenuItem);
+    Vue.use(Menu);
   },
 };
 export default element;

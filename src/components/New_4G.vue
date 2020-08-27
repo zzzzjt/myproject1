@@ -1,5 +1,14 @@
 <template>
   <div>
+    <el-breadcrumb
+      separator-class="el-icon-arrow-right"
+      style="line-height:30px"
+    >
+      <el-breadcrumb-item>监控资源</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/New_4G' }" style="color:#000000"
+        >4G新装详情</el-breadcrumb-item
+      >
+    </el-breadcrumb>
     <el-tabs v-model="activeName">
       <el-tab-pane label="指标看板" name="first">指标看板</el-tab-pane>
       <el-tab-pane label="告警信息" name="second">告警信息</el-tab-pane>
@@ -34,17 +43,40 @@
             :load="load"
             :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
           >
-            <el-table-column prop="target" label="监控指标" min-width="200"></el-table-column>
-            <el-table-column label="监控方法" min-width="200">
+            <el-table-column
+              prop="target"
+              label="监控指标"
+              min-width="180"
+            ></el-table-column>
+            <el-table-column label="监控方法" min-width="180">
               <template slot-scope="scope">
                 <i class="el-icon-warning"></i>
                 <span style="margin-left: 10px">{{ scope.row.method }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="time" label="监控时段" width="220"></el-table-column>
-            <el-table-column prop="change_person" label="修改人" width="150" align="center"></el-table-column>
-            <el-table-column prop="change_time" label="修改时间" width="220" align="center"></el-table-column>
-            <el-table-column prop="operation" label="操作" align="center" width="250">
+            <el-table-column
+              prop="time"
+              label="监控时段"
+              width="180"
+            ></el-table-column>
+            <el-table-column
+              prop="change_person"
+              label="修改人"
+              width="100"
+              align="center"
+            ></el-table-column>
+            <el-table-column
+              prop="change_time"
+              label="修改时间"
+              width="180"
+              align="center"
+            ></el-table-column>
+            <el-table-column
+              prop="operation"
+              label="操作"
+              align="center"
+              width="220"
+            >
               <template>
                 <el-button type="text">修改</el-button>
                 <el-button type="text">删除</el-button>
@@ -197,5 +229,12 @@ export default {
   justify-content: space-between;
   padding: 0 20px 15px 20px;
   min-width: 850px;
+}
+.el-breadcrumb {
+  height: 30px;
+  background-color: #f2f6fc;
+}
+::v-deep .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: #000000;
 }
 </style>
