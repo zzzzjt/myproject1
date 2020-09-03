@@ -1,22 +1,22 @@
 <template>
   <div>
+    <!-- 头部 -->
     <div class="header">
-      <div style="line-height:32px">
+      <div>
         <i class="el-icon-s-fold"></i>
         <span>故障处理视图</span>
       </div>
       <div>
         <i class="el-icon-date"></i>
-        <span style="margin-right:10px">数据时间：17/10/2019~31/10/2019</span>
-        <el-button size="small">近15天</el-button>
-        <el-button size="small">近30天</el-button>
-        <el-button size="small">近90天</el-button>
-        <el-button size="small">自定义</el-button>
+        <span class="header-margin">数据时间：17/10/2019~31/10/2019</span>
+        <el-button v-for="(item,index) in button_list" :key="index" size="small">{{item}}</el-button>
       </div>
     </div>
+    <!-- 主要部分 -->
     <div class="main">
       <div class="left">
-        <div class="left1">
+        <!--左上-->
+        <div class="left-top">
           <el-row
             type="flex"
             class="row-bg"
@@ -24,15 +24,15 @@
             align="middle"
             style="height:100%"
           >
-            <el-col :span="6" style="min-width:150px">
+            <el-col :span="6" class="left-top_item">
               <div class="font-big" style="color:red">3</div>
               <span>未处理完成故障数</span>
             </el-col>
-            <el-col :span="6" style="min-width:150px">
+            <el-col :span="6" class="left-top_item">
               <div class="font-big">3</div>
               <span>故障总数</span>
             </el-col>
-            <el-col :span="6" style="min-width:150px">
+            <el-col :span="6" class="left-top_item">
               <div>
                 <span class="font-big">32</span>分钟
               </div>
@@ -40,111 +40,50 @@
             </el-col>
           </el-row>
         </div>
-        <div id="left2"></div>
-        <div id="left3">
+        <!-- 左中 -->
+        <div id="left-middle"></div>
+        <!-- 左下 -->
+        <div id="left-bottom">
           <div id="pie"></div>
           <div class="describe">
-            <el-collapse style="text-align:right">
+            <el-collapse>
               <el-collapse-item title="IaaS">
-                <div style="padding-right:30px">
-                  <span>主机</span>
+                <div class="describe_item" v-for="(item,index) in IaaS" :key="index">
+                  <span>{{item.name}}</span>
                   <el-progress
-                    :percentage="100"
+                    :percentage="item.percentage"
                     :show-text="false"
-                    style="width:65%"
+                    style="width:63%"
                     :stroke-width="10"
+                    color="#98b6f0"
                   ></el-progress>
-                  <span>6</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>防火墙</span>
-                  <el-progress
-                    :percentage="100*2/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                  ></el-progress>
-                  <span>4</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>交换机</span>
-                  <el-progress
-                    :percentage="100/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                  ></el-progress>
-                  <span>2</span>
+                  <span>{{item.value}}</span>
                 </div>
               </el-collapse-item>
               <el-collapse-item title="PaaS">
-                <div style="padding-right:30px">
-                  <span>Mysql</span>
+                <div class="describe_item" v-for="(item,index) in PaaS" :key="index">
+                  <span>{{item.name}}</span>
                   <el-progress
-                    :percentage="100"
+                    :percentage="item.percentage"
                     :show-text="false"
-                    style="width:65%"
+                    style="width:63%"
                     :stroke-width="10"
-                    color="#f0a86d"
+                    color="#fcc695"
                   ></el-progress>
-                  <span>6</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>DBProxy</span>
-                  <el-progress
-                    :percentage="100*2/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                    color="#f0a86d"
-                  ></el-progress>
-                  <span>4</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>Geteway</span>
-                  <el-progress
-                    :percentage="100/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                    color="#f0a86d"
-                  ></el-progress>
-                  <span>2</span>
+                  <span>{{item.value}}</span>
                 </div>
               </el-collapse-item>
               <el-collapse-item title="SaaS">
-                <div style="padding-right:30px">
-                  <span>应用</span>
+                <div class="describe_item" v-for="(item,index) in SaaS" :key="index">
+                  <span>{{item.name}}</span>
                   <el-progress
-                    :percentage="100"
+                    :percentage="item.percentage"
                     :show-text="false"
-                    style="width:65%"
+                    style="width:63%"
                     :stroke-width="10"
-                    color="#f7f476"
+                    color="#f8ea9d"
                   ></el-progress>
-                  <span>6</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>场景</span>
-                  <el-progress
-                    :percentage="100*2/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                    color="#f7f476"
-                  ></el-progress>
-                  <span>4</span>
-                </div>
-                <div style="padding-right:30px">
-                  <span>服务</span>
-                  <el-progress
-                    :percentage="100/3"
-                    :show-text="false"
-                    style="width:65%"
-                    :stroke-width="10"
-                    color="#f7f476"
-                  ></el-progress>
-                  <span>2</span>
+                  <span>{{item.value}}</span>
                 </div>
               </el-collapse-item>
             </el-collapse>
@@ -152,13 +91,20 @@
         </div>
       </div>
       <div class="right">
-        <div id="right1"></div>
-        <div id="right2">
-          <div class="title">故障影响的资源TOP 5</div>
-          <el-table :data="tableData" style="width: 90%;margin:10px 5%">
-            <el-table-column type="index" width="50"></el-table-column>
-            <el-table-column prop="name" label="资源名称"></el-table-column>
-            <el-table-column prop="frequency" label="影响次数" width="100"></el-table-column>
+        <!-- 右上 -->
+        <div id="right-top"></div>
+        <!-- 右下 -->
+        <div class="right-bottom">
+          <div class="right-bottom_title">故障影响的资源TOP 5</div>
+          <el-table :data="tableData" class="right-bottom_main">
+            <el-table-column
+              v-for="(item,index) in top_list"
+              :key="index"
+              :type="item.type"
+              :prop="item.prop"
+              :label="item.label"
+              :width="item.width"
+            ></el-table-column>
           </el-table>
         </div>
       </div>
@@ -177,6 +123,78 @@ export default {
       datebase: moment().subtract(15, "days"),
       datenow: moment(),
       data: [],
+      IaaS: [
+        {
+          name: "主机",
+          percentage: 100,
+          value: 6,
+        },
+        {
+          name: "防火墙",
+          percentage: (100 * 2) / 3,
+          value: 4,
+        },
+        {
+          name: "交换机",
+          percentage: 100 / 3,
+          value: 2,
+        },
+      ],
+      PaaS: [
+        {
+          name: "MySql",
+          percentage: 100,
+          value: 6,
+        },
+        {
+          name: "DBProxy",
+          percentage: (100 * 2) / 3,
+          value: 4,
+        },
+        {
+          name: "Geteway",
+          percentage: 100 / 3,
+          value: 2,
+        },
+      ],
+      SaaS: [
+        {
+          name: "应用",
+          percentage: 100,
+          value: 6,
+        },
+        {
+          name: "场景",
+          percentage: (100 * 2) / 3,
+          value: 4,
+        },
+        {
+          name: "服务",
+          percentage: 100 / 3,
+          value: 2,
+        },
+      ],
+      button_list: ["近15天", "近30天", "近90天", "自定义"],
+      top_list: [
+        {
+          type: "index",
+          prop: "",
+          label: "",
+          width: "50",
+        },
+        {
+          type: "",
+          prop: "name",
+          label: "资源名称",
+          width: "",
+        },
+        {
+          type: "",
+          prop: "frequency",
+          label: "影响次数",
+          width: "100",
+        },
+      ],
       tableData: [
         {
           name: "[服务] 服开轮询接受接口",
@@ -203,13 +221,12 @@ export default {
   },
   methods: {
     initEchart() {
-      let dom1 = echarts.init(document.getElementById("left2"));
+      let dom1 = echarts.init(document.getElementById("left-middle"));
       for (let i = 1; i <= 15; i++) {
         let dayStr = this.datebase.add(1, "days").format("D/M");
         let value = Mock.mock("@integer(0, 10)");
         this.data.push([dayStr, value]);
       }
-
       let option1 = {
         animation: false,
         title: {
@@ -293,12 +310,7 @@ export default {
         ],
       };
       dom1.setOption(option1);
-      window.addEventListener("resize", function () {
-        dom1.resize();
-        dom2.resize();
-        dom3.resize();
-      });
-      let dom2 = echarts.init(document.getElementById("right1"));
+      let dom2 = echarts.init(document.getElementById("right-top"));
       // 指定图表的配置项和数据
       let option2 = {
         color: ["#3398DB"],
@@ -400,9 +412,6 @@ export default {
               }
             });
             return `${name}       ${clientcounts[index]}       ${clientradius[index]}`;
-            // return (
-            //   name + "   " + clientcounts[index] + "   " + clientradius[index]
-            // );
           },
         },
         series: [
@@ -434,6 +443,11 @@ export default {
         ],
       };
       dom3.setOption(option3);
+      window.addEventListener("resize", function () {
+        dom1.resize();
+        dom2.resize();
+        dom3.resize();
+      });
     },
   },
   mounted() {
@@ -445,6 +459,7 @@ export default {
 .header {
   color: #606266;
   font-size: 14px;
+  line-height: 32px;
   display: flex;
   justify-content: space-between;
   min-width: 850px;
@@ -464,26 +479,24 @@ i {
 }
 .left {
   width: 60%;
-  //min-width: 500px;
   border-right: 10px solid #ebeef5;
   height: 100%;
 }
 .right {
   width: 40%;
-  //min-width: 350px;
   height: 100%;
 }
-.left1 {
+.left-top {
   height: 80px;
   background-color: white;
   text-align: center;
 }
-#left2 {
+#left-middle {
   height: 180px;
   margin: 10px 0;
   background-color: white;
 }
-#left3 {
+#left-bottom {
   height: 270px;
   min-width: 350px;
   background-color: white;
@@ -498,19 +511,35 @@ i {
 .describe {
   width: 40%;
   max-height: 270px;
+  text-align: right;
   overflow-y: scroll;
   border-left: 1px solid #ebeef5;
   margin: 20px 0;
   padding-left: 20px;
 }
-#right1 {
+.describe_item {
+  padding-right: 15%;
+}
+#right-top {
   height: 270px;
   margin-bottom: 10px;
   background-color: white;
 }
-#right2 {
+.right-bottom {
   height: 270px;
   background-color: white;
+}
+.right-bottom_title {
+  color: #303133;
+  min-width: 300px;
+  padding-left: 30px;
+  font-weight: 600;
+  font-size: 17px;
+  padding-top: 10px;
+}
+.right-bottom_main {
+  width: 90%;
+  margin: 10px 5%;
 }
 .font-big {
   color: #303133;
@@ -520,6 +549,9 @@ i {
 .el-progress {
   display: inline-block;
   margin: 0 8px;
+}
+.header-margin {
+  margin-right: 10px;
 }
 ::v-deep .el-table .cell {
   text-overflow: ellipsis;
@@ -533,14 +565,6 @@ i {
 }
 ::v-deep .el-table td {
   padding: 6px 0;
-}
-.title {
-  color: #303133;
-  min-width: 300px;
-  padding-left: 30px;
-  font-weight: 600;
-  font-size: 17px;
-  padding-top: 10px;
 }
 ::v-deep .el-collapse-item__header {
   border: none;
@@ -561,5 +585,15 @@ i {
 ::v-deep .el-collapse-item__header {
   height: 30px;
   line-height: 30px;
+}
+::v-deep .el-progress-bar__outer {
+  border-radius: 0;
+}
+::v-deep .el-progress-bar__inner {
+  border-radius: 0;
+}
+::v-deep .el-collapse-item__content {
+  font-size: 10px;
+  line-height: 1.3;
 }
 </style>

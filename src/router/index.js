@@ -1,6 +1,6 @@
-const App = () => import("../components/Home");
-const New_4G = () => import("../components/New_4G");
-const Trouble_view = () => import("../components/Trouble_view");
+const App = () => import("../views/Home");
+const New_4G = () => import("../views/New_4G");
+const Trouble_view = () => import("../views/Trouble_view");
 
 const routes = [
   {
