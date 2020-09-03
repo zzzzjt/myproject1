@@ -47,45 +47,19 @@
           <div id="pie"></div>
           <div class="describe">
             <el-collapse>
-              <el-collapse-item title="IaaS">
-                <div class="describe_item" v-for="(item,index) in IaaS" :key="index">
+              <collapse-item v-for="(title,index) in title_list" :key="index" :title="title.name">
+                <div class="describe_item" v-for="(item,index) in title.item" :key="index">
                   <span>{{item.name}}</span>
                   <el-progress
                     :percentage="item.percentage"
                     :show-text="false"
                     style="width:63%"
                     :stroke-width="10"
-                    color="#98b6f0"
+                    :color="title.color"
                   ></el-progress>
                   <span>{{item.value}}</span>
                 </div>
-              </el-collapse-item>
-              <el-collapse-item title="PaaS">
-                <div class="describe_item" v-for="(item,index) in PaaS" :key="index">
-                  <span>{{item.name}}</span>
-                  <el-progress
-                    :percentage="item.percentage"
-                    :show-text="false"
-                    style="width:63%"
-                    :stroke-width="10"
-                    color="#fcc695"
-                  ></el-progress>
-                  <span>{{item.value}}</span>
-                </div>
-              </el-collapse-item>
-              <el-collapse-item title="SaaS">
-                <div class="describe_item" v-for="(item,index) in SaaS" :key="index">
-                  <span>{{item.name}}</span>
-                  <el-progress
-                    :percentage="item.percentage"
-                    :show-text="false"
-                    style="width:63%"
-                    :stroke-width="10"
-                    color="#f8ea9d"
-                  ></el-progress>
-                  <span>{{item.value}}</span>
-                </div>
-              </el-collapse-item>
+              </collapse-item>
             </el-collapse>
           </div>
         </div>
@@ -113,6 +87,7 @@
 </template>
 
 <script>
+import collapse_item from "@/components/collapse_item";
 const Mock = require("mockjs");
 const echarts = require("echarts");
 const moment = require("moment");
@@ -123,57 +98,72 @@ export default {
       datebase: moment().subtract(15, "days"),
       datenow: moment(),
       data: [],
-      IaaS: [
+      title_list: [
         {
-          name: "主机",
-          percentage: 100,
-          value: 6,
+          name: "IaaS",
+          item: [
+            {
+              name: "主机",
+              percentage: 100,
+              value: 6,
+            },
+            {
+              name: "防火墙",
+              percentage: (100 * 2) / 3,
+              value: 4,
+            },
+            {
+              name: "交换机",
+              percentage: 100 / 3,
+              value: 2,
+            },
+          ],
+          color: "#98b6f0",
         },
         {
-          name: "防火墙",
-          percentage: (100 * 2) / 3,
-          value: 4,
+          name: "PaaS",
+          item: [
+            {
+              name: "MySql",
+              percentage: 100,
+              value: 6,
+            },
+            {
+              name: "DBProxy",
+              percentage: (100 * 2) / 3,
+              value: 4,
+            },
+            {
+              name: "Geteway",
+              percentage: 100 / 3,
+              value: 2,
+            },
+          ],
+          color: "#fcc695",
         },
         {
-          name: "交换机",
-          percentage: 100 / 3,
-          value: 2,
+          name: "SaaS",
+          item: [
+            {
+              name: "应用",
+              percentage: 100,
+              value: 6,
+            },
+            {
+              name: "场景",
+              percentage: (100 * 2) / 3,
+              value: 4,
+            },
+            {
+              name: "服务",
+              percentage: 100 / 3,
+              value: 2,
+            },
+          ],
+          color: "#f8ea9d",
         },
       ],
-      PaaS: [
-        {
-          name: "MySql",
-          percentage: 100,
-          value: 6,
-        },
-        {
-          name: "DBProxy",
-          percentage: (100 * 2) / 3,
-          value: 4,
-        },
-        {
-          name: "Geteway",
-          percentage: 100 / 3,
-          value: 2,
-        },
-      ],
-      SaaS: [
-        {
-          name: "应用",
-          percentage: 100,
-          value: 6,
-        },
-        {
-          name: "场景",
-          percentage: (100 * 2) / 3,
-          value: 4,
-        },
-        {
-          name: "服务",
-          percentage: 100 / 3,
-          value: 2,
-        },
-      ],
+
       button_list: ["近15天", "近30天", "近90天", "自定义"],
       top_list: [
         {
@@ -271,8 +261,6 @@ export default {
             },
           },
           axisTick: { show: false },
-          // max: 10,
-          // min: 0,
           splitNumber: 2,
         },
         grid: {
@@ -280,8 +268,8 @@ export default {
           bottom: 30,
           left: 40,
           right: 30,
-          show: true,
-          borderColor: "#C0C4CC",
+          // show: true,
+          // borderColor: "#C0C4CC",
         },
         series: [
           {
@@ -448,7 +436,11 @@ export default {
         dom2.resize();
         dom3.resize();
       });
+      console.log(JSON.stringify(option1));
     },
+  },
+  components: {
+    "collapse-item": collapse_item,
   },
   mounted() {
     this.initEchart();
@@ -578,9 +570,13 @@ i {
 ::v-deep .el-collapse-item__content {
   padding-bottom: 0px;
 }
-::v-deep .el-table_1_column_1 {
-  text-align: center;
-  color: #c0c4cc;
+::v-deep .el-table__row {
+  > td {
+    &:first-child {
+      text-align: center;
+      color: #c0c4cc;
+    }
+  }
 }
 ::v-deep .el-collapse-item__header {
   height: 30px;
