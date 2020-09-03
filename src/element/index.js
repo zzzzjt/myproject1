@@ -17,6 +17,9 @@ import {
   Submenu,
   MenuItem,
   Menu,
+  Collapse,
+  CollapseItem,
+  Progress,
 } from "element-ui";
 const element = {
   install: function(Vue) {
@@ -38,6 +41,9 @@ const element = {
     Vue.use(Submenu);
     Vue.use(MenuItem);
     Vue.use(Menu);
+    Vue.use(Collapse);
+    Vue.use(CollapseItem);
+    Vue.use(Progress);
   },
 };
 export default element;
