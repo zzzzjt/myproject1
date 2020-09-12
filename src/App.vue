@@ -14,6 +14,9 @@
             <router-link :to="{ path: '/Trouble_view' }">
               <el-menu-item index="1-2">故障处理视图</el-menu-item>
             </router-link>
+            <router-link :to="{ path: '/Overview' }">
+              <el-menu-item index="1-3">概况</el-menu-item>
+            </router-link>
           </el-submenu>
         </el-menu>
       </el-aside>

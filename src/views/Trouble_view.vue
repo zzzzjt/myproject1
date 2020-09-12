@@ -24,15 +24,15 @@
             align="middle"
             style="height:100%"
           >
-            <el-col :span="6" class="left-top_item">
+            <el-col :span="6">
               <div class="font-big" style="color:red">3</div>
               <span>未处理完成故障数</span>
             </el-col>
-            <el-col :span="6" class="left-top_item">
+            <el-col :span="6">
               <div class="font-big">3</div>
               <span>故障总数</span>
             </el-col>
-            <el-col :span="6" class="left-top_item">
+            <el-col :span="6">
               <div>
                 <span class="font-big">32</span>分钟
               </div>
@@ -217,6 +217,7 @@ export default {
         let value = Mock.mock("@integer(0, 10)");
         this.data.push([dayStr, value]);
       }
+      //故障趋势图
       let option1 = {
         animation: false,
         title: {
@@ -276,8 +277,6 @@ export default {
             name: "模拟数据",
             type: "line",
             smooth: true,
-            symbol: "circle",
-            symbolSize: 5,
             itemStyle: {
               color: "#3398DB",
             },
@@ -298,8 +297,8 @@ export default {
         ],
       };
       dom1.setOption(option1);
+      //按故障等级统计故障数量
       let dom2 = echarts.init(document.getElementById("right-top"));
-      // 指定图表的配置项和数据
       let option2 = {
         color: ["#3398DB"],
         title: {
@@ -368,6 +367,7 @@ export default {
         ],
       };
       dom2.setOption(option2);
+      //各资源故障占比
       let dom3 = echarts.init(document.getElementById("pie"));
       let option3 = {
         title: {
@@ -436,13 +436,16 @@ export default {
         dom2.resize();
         dom3.resize();
       });
-      console.log(JSON.stringify(option1));
+      console.log(JSON.stringify(option1), "折线图");
+      console.log(JSON.stringify(option3), "饼图");
     },
   },
   components: {
     "collapse-item": collapse_item,
   },
   mounted() {
+    console.log(this.data, "数据");
+
     this.initEchart();
   },
 };

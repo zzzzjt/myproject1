@@ -21,10 +21,9 @@
         @focus="handleFocus"
         @blur="focusing = false"
       >
-        <!--折叠面板的标题-->
-
         <!--折叠面板的收起或折叠的箭头图标-->
         <i class="collapse-item__arrow el-icon-arrow-right" :class="{'is-active': isActive}"></i>
+        <!--折叠面板的标题-->
         <slot name="title">{{title}}</slot>
       </div>
     </div>
