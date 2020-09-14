@@ -80,22 +80,22 @@ export default {
         legend: {
           orient: "vertical",
           top: "center",
-          right: 10,
+          right: 20,
           itemHeight: 12,
           itemWidth: 12,
           formatter: (name) => {
-            console.log(this);
-            let data = this.rows;
+            let data = this.chartData.rows;
             let total = 0;
             let value = 0;
             for (let i = 0, l = data.length; i < l; i++) {
               total += data[i].value;
               if (data[i].name == name) {
                 value = data[i].value;
+                console.log(value);
               }
             }
             let percent = ((value / total) * 100).toFixed(2);
-            return `{a|${name}} {b|${value}} {c|${percent}}%`;
+            return `{a|${name}} {b|${value}} {c|${percent}%}`;
           },
           textStyle: {
             rich: {
@@ -117,7 +117,6 @@ export default {
         title: {
           left: 15,
           top: 10,
-
           text: this.title,
           textStyle: {
             color: "#404142",
@@ -187,10 +186,7 @@ export default {
       type: String,
     },
   },
-  mounted() {
-    this.rows = this.chartData.rows;
-    console.log(this.chartData);
-  },
+  mounted() {},
 };
 </script>
 

@@ -144,4 +144,8 @@ export default {
     }
   }
 }
+::v-deep .el-progress-bar {
+  padding-right: 53px;
+  margin-right: -57px;
+}
 </style>

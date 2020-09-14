@@ -65,10 +65,10 @@
       <div class="bottom">
         <div class="bottom-row">
           <div class="bottom-left">
-            <my-table :tabledata="IaaSData" title="IaaS层监控情况" :value="10" :label="IaaSlabel"></my-table>
+            <my-table :tabledata="IaaSData" title="IaaS层监控情况" :value="20" :label="IaaSlabel"></my-table>
           </div>
           <div class="bottom-right">
-            <my-table :tabledata="PaaSData" title="PaaS层监控情况" :value="10" :label="PaaSlabel"></my-table>
+            <my-table :tabledata="PaaSData" title="PaaS层监控情况" :value="16" :label="PaaSlabel"></my-table>
           </div>
         </div>
         <div class="bottom-row">
@@ -183,9 +183,9 @@ export default {
         ],
       },
       IaaSData: [
-        { type: "主机", number: 6, proportion: "15/33", rate: "5%" },
-        { type: "交换机", number: 1, proportion: "2/20", rate: "10%" },
-        { type: "存储", number: 2, proportion: "1/15", rate: "6.7%" },
+        { type: "主机", number: 15, proportion: "15/33", rate: "5%" },
+        { type: "交换机", number: 2, proportion: "2/20", rate: "10%" },
+        { type: "存储", number: 1, proportion: "1/15", rate: "6.7%" },
         { type: "光纤交换机", number: 1, proportion: "1/5", rate: "20%" },
         { type: "防火墙", number: 0, proportion: "0/4", rate: "0%" },
       ],
@@ -196,11 +196,11 @@ export default {
         "设备告警率",
       ],
       PaaSData: [
-        { type: "分布式数据库", number: 6, proportion: "15/33", rate: "5%" },
-        { type: "分布式缓存", number: 1, proportion: "2/20", rate: "10%" },
-        { type: "分布式消息", number: 2, proportion: "1/15", rate: "6.7%" },
-        { type: "容器", number: 1, proportion: "1/5", rate: "20%" },
-        { type: "其他", number: 0, proportion: "0/4", rate: "0%" },
+        { type: "分布式数据库", number: 1, proportion: "1/2", rate: "50%" },
+        { type: "分布式缓存", number: 2, proportion: "2/20", rate: "10%" },
+        { type: "分布式消息", number: 1, proportion: "1/8", rate: "12.5%" },
+        { type: "容器", number: 10, proportion: "10/50", rate: "22%" },
+        { type: "其他", number: 1, proportion: "1/3", rate: "33.3%" },
       ],
       PaaSlabel: [
         "设备类型",

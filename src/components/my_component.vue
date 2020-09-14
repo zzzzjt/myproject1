@@ -193,7 +193,7 @@ export default {
 }
 .main-right {
   width: 70%;
-  margin-right: 15px;
+  margin-right: 20px;
 }
 ::v-deep .el-table th {
   text-align: right;
